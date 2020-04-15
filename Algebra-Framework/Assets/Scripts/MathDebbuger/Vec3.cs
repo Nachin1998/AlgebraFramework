@@ -99,11 +99,6 @@ namespace CustomMath
         {
             return new Vec3(v3.x / scalar, v3.y / scalar, v3.z / scalar);
         }
-
-        /*public static float Dot(Vec3 a, Vec3 b)
-        {
-            return new Vec3();
-        }*/
         public static implicit operator Vector3(Vec3 v3)
         {
             return new Vector3(v3.x, v3.y, v3.z);
@@ -134,19 +129,23 @@ namespace CustomMath
         }
         public static float Magnitude(Vec3 vector)
         {
-            throw new NotImplementedException();
+            return vector.magnitude;
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            return new Vec3((a.y * b.z) - (b.y * a.z), 
+                            (a.z * b.x) - (b.z * a.x), 
+                            (a.x * b.y) - (b.x * a.y));
         }
         public static float Distance(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            return (((b.x - a.x) * (b.x - a.x)) + 
+                    ((b.y - a.y) * (b.x - a.x)) + 
+                    ((b.z - a.z) * (b.x - a.x))) / 2;
         }
         public static float Dot(Vec3 a, Vec3 b)
         {
-            return ((a.x * b.x) + (a.y * b.y) + (a.y * b.y));
+            return Mathf.Sqrt(a.x + a.y + a.z) + Mathf.Sqrt(b.x + b.y + b.z) * Mathf.Cos(Vec3.Angle(a, b));
         }
         public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {

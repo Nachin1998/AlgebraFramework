@@ -63,10 +63,16 @@ public class Ejercicios : MonoBehaviour
                 ejerResult = new Vec3(lineaB - lineaA);
                 break;
             case Ejercicio.Tres:
+                //VectorDebugger.UpdatePosition("Roja", Vec3.Lerp(linea));
+                //ejerResult = new Vec3(Vec3.Dot(lineaA, lineaB));
                 break;
             case Ejercicio.Cuatro:
+                //VectorDebugger.UpdatePosition("Roja", new Vec3(Vec3.Cross(lineaA, lineaB)));
+                // ejerResult = new Vec3(Vec3.Cross(lineaA, lineaB, 1f));
                 break;
             case Ejercicio.Cinco:
+                //VectorDebugger.UpdatePosition("Roja", new Vec3(Vec3.Lerp(lineaA, lineaB, 1f)));
+                // ejerResult = new Vec3(Vec3.Lerp(lineaA, lineaB, 1f));
                 break;
             case Ejercicio.Seis:
                 break;
