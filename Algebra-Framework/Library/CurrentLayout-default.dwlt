@@ -73,7 +73,7 @@ MonoBehaviour:
   m_MinSize: {x: 887, y: 494}
   m_MaxSize: {x: 16012, y: 14044}
   vertical: 0
-  controlID: 74
+  controlID: 143
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -363,20 +363,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/MathDebbuger/Tests
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/MathDebbuger/Tests
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Usuario\Desktop\AlgebraFramework\Algebra-Framework
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9a2d0000
-    m_LastClickedID: 11674
-    m_ExpandedIDs: 00000000922c0000fa2c0000fc2e0000
+    m_SelectedIDs: f02d0000
+    m_LastClickedID: 11760
+    m_ExpandedIDs: 00000000962c0000fe2c0000b82e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -404,7 +404,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000922c0000fa2c0000
+    m_ExpandedIDs: 00000000962c0000fe2c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -525,9 +525,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7c2a0000
+      m_SelectedIDs: 322e0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 7afbffff
+      m_ExpandedIDs: 22b6ffffecbfffff7afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -587,9 +587,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 19.54772, y: 7.5607862, z: -11.141714}
+    m_Target: {x: -79.31996, y: 56.837524, z: -37.1452}
     speed: 2
-    m_Value: {x: 19.54772, y: 7.5607862, z: -11.141714}
+    m_Value: {x: -79.31996, y: 56.837524, z: -37.1452}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -618,13 +618,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.21319452, y: -0.30995446, z: 0.071531735, w: -0.92379725}
+    m_Target: {x: -0.21206558, y: -0.5259597, z: 0.13717124, w: -0.8122402}
     speed: 2
-    m_Value: {x: -0.21468322, y: -0.30845478, z: 0.07167317, w: -0.9239208}
+    m_Value: {x: -0.2108307, y: -0.526124, z: 0.13637137, w: -0.8124942}
   m_Size:
-    m_Target: 22
+    m_Target: 0.8573645
     speed: 2
-    m_Value: 22
+    m_Value: 0.8573645
   m_Ortho:
     m_Target: 0
     speed: 2

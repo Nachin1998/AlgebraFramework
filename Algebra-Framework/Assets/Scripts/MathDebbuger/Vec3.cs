@@ -11,7 +11,7 @@ namespace CustomMath
 
         public float sqrMagnitude { get { return (x * x + y * y + z * z); } }
         public Vector3 normalized { get { return new Vec3(x / magnitude, y / magnitude, z / magnitude); } }
-        public float magnitude { get { throw new NotImplementedException(); } }
+        public float magnitude { get { return Mathf.Sqrt(x * x + y * y + z * z); } }
         #endregion
 
         #region Default Values
@@ -87,30 +87,32 @@ namespace CustomMath
             return new Vec3(leftV3.x - rightV3.x, leftV3.y - rightV3.y, leftV3.z - rightV3.z);
         }
 
+        public static Vec3 operator -(Vec3 v3)
+        {
+            return new Vec3(-v3.x, -v3.y, -v3.z);
+        }
+
         public static Vec3 operator *(Vec3 v3, float scalar)
         {
             return new Vec3(v3.x * scalar, v3.y * scalar, v3.z * scalar);
         }
         public static Vec3 operator *(float scalar, Vec3 v3)
         {
-            throw new NotImplementedException();
+            return new Vec3(scalar * v3.x, scalar * v3.y, scalar * v3.z);
         }
         public static Vec3 operator /(Vec3 v3, float scalar)
         {
             return new Vec3(v3.x / scalar, v3.y / scalar, v3.z / scalar);
         }
+
         public static implicit operator Vector3(Vec3 v3)
         {
             return new Vector3(v3.x, v3.y, v3.z);
         }
-        public static Vec3 operator -(Vec3 v3)
-        {
-            return new Vec3(-v3.x, -v3.y, -v3.z);
-        }
 
         public static implicit operator Vector2(Vec3 v2)
         {
-            return new Vec3(v2.x, v2.y, v2.z);
+            return new Vector2(v2.x, v2.y);
         }
         #endregion
 
@@ -121,7 +123,10 @@ namespace CustomMath
         }
         public static float Angle(Vec3 from, Vec3 to)
         {
-            throw new NotImplementedException();
+            float result = (from.x * to.x) + (from.y * to.y) + (from.z * to.z);
+            float a = Mathf.Sqrt(from.x + from.y + from.z);
+            float b = Mathf.Sqrt(to.x + to.y + to.z);
+            return Mathf.Acos(result / (a * b));
         }
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
@@ -133,8 +138,8 @@ namespace CustomMath
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
-            return new Vec3((a.y * b.z) - (b.y * a.z), 
-                            (a.z * b.x) - (b.z * a.x), 
+            return new Vec3((a.y * b.z) - (b.y * a.z),
+                            (a.z * b.x) - (b.x * a.z),
                             (a.x * b.y) - (b.x * a.y));
         }
         public static float Distance(Vec3 a, Vec3 b)
@@ -149,15 +154,55 @@ namespace CustomMath
         }
         public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {
-            throw new NotImplementedException();
+            Vec3 newVec = Vec3.One;
+            if (t < 1)
+            {
+                newVec = new Vec3(((b - a) * t + a));
+            }
+            else
+            {
+                t = 1.0f;
+            }
+            return newVec;
         }
         public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)
         {
-            throw new NotImplementedException();
+            Vec3 newVec;
+
+            newVec.x = a.x + (b.x - a.x) * t;
+            newVec.y = a.y + (b.y - a.y) * t;
+            newVec.z = a.z + (b.z - a.z) * t;
+
+            return new Vec3(newVec);
         }
         public static Vec3 Max(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            Vec3 c;
+            if (a.x > b.x)
+            {
+                c.x = a.x;
+            }
+            else
+            {
+                c.x = b.x;
+            }
+            if (a.y > b.y)
+            {
+                c.y = a.y;
+            }
+            else
+            {
+                c.y = b.y;
+            }
+            if (a.z > b.z)
+            {
+                c.z = a.z;
+            }
+            else
+            {
+                c.z = b.z;
+            }
+            return c;
         }
         public static Vec3 Min(Vec3 a, Vec3 b)
         {
@@ -167,25 +212,37 @@ namespace CustomMath
         {
             return vector.sqrMagnitude;
         }
-        public static Vec3 Project(Vec3 vector, Vec3 onNormal) 
+        public static Vec3 Project(Vec3 vector, Vec3 onNormal)
+        {
+            return (Vec3.Dot(vector, onNormal) / Vec3.Dot(vector, vector)) * vector;
+        }
+        public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal)
         {
             throw new NotImplementedException();
         }
-        public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal) 
+        public void Set(float newX, float newY, float newZ) //hacer
         {
-            throw new NotImplementedException();
+            x = newX;
+            y = newY;
+            z = newZ;
         }
-        public void Set(float newX, float newY, float newZ)
+        public void Scale(Vec3 scale) // hacer
         {
-            throw new NotImplementedException();
+            x = x * scale.x;
+            y = y * scale.y;
+            z = z * scale.z;
         }
-        public void Scale(Vec3 scale)
+        public void Normalize() // hacer
         {
-            throw new NotImplementedException();
+            x = x / magnitude;
+            y = y / magnitude;
+            z = z/ magnitude;
         }
-        public void Normalize()
+        public static void Normalize(Vec3 value) // hacer
         {
-            throw new NotImplementedException();
+            value.x = value.x / value.magnitude;
+            value.y = value.y / value.magnitude;
+            value.z = value.z / value.magnitude;
         }
         #endregion
 

@@ -2,42 +2,44 @@
 using UnityEngine;
 using MathDebbuger;
 using CustomMath;
-using System.Threading.Tasks;
 
 public class Ejercicios : MonoBehaviour
 {
-    public enum Ejercicio{
-        Uno,
-        Dos,
-        Tres,
-        Cuatro,
-        Cinco,
-        Seis,
-        Siete,
-        Ocho,
-        nueve,
+    public enum Ejercicio
+    {
+        Uno, 
+        Dos, 
+        Tres, 
+        Cuatro, 
+        Cinco, 
+        Seis, 
+        Siete, 
+        Ocho, 
+        Nueve, 
         Diez
-    };
+    }
 
     public Ejercicio ejercicio = Ejercicio.Uno;
-    
+
     public Vector3 lineaA;
     public Vector3 lineaB;
     Vec3 ejerResult;
+
+    //Ayudas
+    Vec3 ejerTresVecAux;            
+    float ejerCincoTimer = 0;
+    float ejerDiezTimer = 0;
 
     void Start()
     {
         VectorDebugger.EnableCoordinates();
 
-        Vec3 a = new Vec3(lineaA);
-        Vec3 b = new Vec3(lineaB);
-
         Debug.Log(lineaA.ToString());
-        VectorDebugger.AddVector(lineaA, Color.red, "Roja");
+        VectorDebugger.AddVector(lineaA, Color.green, "Verde");
         Debug.Log(lineaB.ToString());
         VectorDebugger.AddVector(lineaB, Color.blue, "Azul");
         Debug.Log(ejerResult.ToString());
-        VectorDebugger.AddVector(ejerResult, Color.white, "Blanca");
+        VectorDebugger.AddVector(ejerResult, Color.red, "Roja");
 
         VectorDebugger.EnableEditorView();
     }
@@ -45,52 +47,64 @@ public class Ejercicios : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            VectorDebugger.TurnOffVector("elAzul");
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            VectorDebugger.TurnOnVector("elAzul");
-        }
+        Vec3 a = new Vec3(lineaA);
+        Vec3 b = new Vec3(lineaB);
 
         switch (ejercicio)
         {
             case Ejercicio.Uno:
-                ejerResult = new Vec3(lineaA + lineaB);
+                ejerResult = new Vec3(a + b);
                 break;
+
             case Ejercicio.Dos:
-                ejerResult = new Vec3(lineaB - lineaA);
+                ejerResult = new Vec3(b - a);
                 break;
+
             case Ejercicio.Tres:
-                //VectorDebugger.UpdatePosition("Roja", Vec3.Lerp(linea));
-                //ejerResult = new Vec3(Vec3.Dot(lineaA, lineaB));
+                //ejerResult = a.Scale(b); no funciona
+
+                ejerTresVecAux = a;
+                ejerTresVecAux.Scale(b);
+                
+                ejerResult = ejerTresVecAux;
                 break;
+
             case Ejercicio.Cuatro:
-                //VectorDebugger.UpdatePosition("Roja", new Vec3(Vec3.Cross(lineaA, lineaB)));
-                // ejerResult = new Vec3(Vec3.Cross(lineaA, lineaB, 1f));
+                ejerResult = Vec3.Cross(b, a);
                 break;
+
             case Ejercicio.Cinco:
-                //VectorDebugger.UpdatePosition("Roja", new Vec3(Vec3.Lerp(lineaA, lineaB, 1f)));
-                // ejerResult = new Vec3(Vec3.Lerp(lineaA, lineaB, 1f));
+                ejerCincoTimer += Time.deltaTime;
+
+                if (ejerCincoTimer >= 1.0f)
+                {
+                    ejerCincoTimer = 0;
+                }
+
+                ejerResult = Vec3.Lerp(a, b, ejerCincoTimer);
                 break;
+
             case Ejercicio.Seis:
+                ejerResult = Vec3.Max(a, b);
                 break;
+
             case Ejercicio.Siete:
                 break;
+
             case Ejercicio.Ocho:
+
                 break;
-            case Ejercicio.nueve:
+            case Ejercicio.Nueve:
                 break;
+
             case Ejercicio.Diez:
-                break;
-            default:
-                Debug.Log("Algebra machine broke");
+                //Got to work on unclamped?
+                //ejerResult = Vec3.LerpUnclamped(a, b, ejerDiezTimer);
                 break;
         }
 
-        VectorDebugger.UpdatePosition("Roja", lineaA);
-        VectorDebugger.UpdatePosition("Azul", lineaB);
-        VectorDebugger.UpdatePosition("Blanca", ejerResult);
+        VectorDebugger.UpdatePosition("Verde", a);
+        VectorDebugger.UpdatePosition("Azul", b);
+        VectorDebugger.UpdatePosition("Roja", ejerResult);
     }
 }
