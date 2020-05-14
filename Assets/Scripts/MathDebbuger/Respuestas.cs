@@ -3,15 +3,15 @@ using UnityEngine;
 using MathDebbuger;
 using CustomMath;
 
-public class Ejercicios : MonoBehaviour
+public class Respuestas : MonoBehaviour
 {
-    public enum Ejercicio
+    public enum RespuestaAEjer
     {
         Uno, 
         Dos, 
         Tres, 
         Cuatro, 
-        Cinco, 
+        Cinco,
         Seis, 
         Siete, 
         Ocho, 
@@ -19,11 +19,11 @@ public class Ejercicios : MonoBehaviour
         Diez
     }
 
-    public Ejercicio ejercicio = Ejercicio.Uno;
+    public RespuestaAEjer respuestaAEjer = RespuestaAEjer.Uno;
 
     public Vector3 lineaA;
     public Vector3 lineaB;
-    Vec3 ejerResult;
+    Vector3 lineaEjerResult;
 
     //Ayudas
     Vec3 ejerTresVecAux;            
@@ -38,8 +38,8 @@ public class Ejercicios : MonoBehaviour
         VectorDebugger.AddVector(lineaA, Color.green, "Verde");
         Debug.Log(lineaB.ToString());
         VectorDebugger.AddVector(lineaB, Color.blue, "Azul");
-        Debug.Log(ejerResult.ToString());
-        VectorDebugger.AddVector(ejerResult, Color.red, "Roja");
+        Debug.Log(lineaEjerResult.ToString());
+        VectorDebugger.AddVector(lineaEjerResult, Color.red, "Roja");
 
         VectorDebugger.EnableEditorView();
     }
@@ -49,31 +49,33 @@ public class Ejercicios : MonoBehaviour
     {
         Vec3 a = new Vec3(lineaA);
         Vec3 b = new Vec3(lineaB);
+        Vec3 ejerResult = new Vec3(lineaEjerResult);
 
-        switch (ejercicio)
+        switch (respuestaAEjer)
         {
-            case Ejercicio.Uno:
+            case RespuestaAEjer.Uno:
                 ejerResult = new Vec3(a + b);
                 break;
 
-            case Ejercicio.Dos:
+            case RespuestaAEjer.Dos:
                 ejerResult = new Vec3(b - a);
                 break;
 
-            case Ejercicio.Tres:
-                //ejerResult = a.Scale(b); no funciona
+            case RespuestaAEjer.Tres:
+                //ejerResult = a.Scale(b); doesnt work
 
                 ejerTresVecAux = a;
                 ejerTresVecAux.Scale(b);
                 
                 ejerResult = ejerTresVecAux;
+                //somehow this works
                 break;
 
-            case Ejercicio.Cuatro:
+            case RespuestaAEjer.Cuatro:
                 ejerResult = Vec3.Cross(b, a);
                 break;
 
-            case Ejercicio.Cinco:
+            case RespuestaAEjer.Cinco:
                 ejerCincoTimer += Time.deltaTime;
 
                 if (ejerCincoTimer >= 1.0f)
@@ -84,22 +86,33 @@ public class Ejercicios : MonoBehaviour
                 ejerResult = Vec3.Lerp(a, b, ejerCincoTimer);
                 break;
 
-            case Ejercicio.Seis:
+            case RespuestaAEjer.Seis:
                 ejerResult = Vec3.Max(a, b);
                 break;
 
-            case Ejercicio.Siete:
+            case RespuestaAEjer.Siete:
+                //Got to work on Project
+                //ejerResult = Vec3.Project(a, b);
                 break;
 
-            case Ejercicio.Ocho:
-
-                break;
-            case Ejercicio.Nueve:
+            case RespuestaAEjer.Ocho:
+                //No idea
                 break;
 
-            case Ejercicio.Diez:
-                //Got to work on unclamped?
-                //ejerResult = Vec3.LerpUnclamped(a, b, ejerDiezTimer);
+            case RespuestaAEjer.Nueve:
+                //Got to work on Reflect
+                //ejerResult = Vec3.Reflect(a, b);
+                break;
+
+            case RespuestaAEjer.Diez:
+                ejerDiezTimer += Time.deltaTime;
+
+                if (ejerDiezTimer >= 10.0f)
+                {
+                    ejerDiezTimer = 0;
+                }
+
+                ejerResult = Vec3.LerpUnclamped(a, b, ejerDiezTimer);
                 break;
         }
 

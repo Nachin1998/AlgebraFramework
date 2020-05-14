@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ejercicio : MonoBehaviour
+public class espuestaEjer : MonoBehaviour
 {
     public Plane plane;
     void Start()
