@@ -52,7 +52,15 @@ namespace CustomMath
         }
         public bool GetSide(Vector3 point)
         {
-            throw new NotImplementedException();
+            float aux = GetDistanceToPoint(point);
+            if (aux > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public bool Raycast(Ray ray, out float enter)
         {
