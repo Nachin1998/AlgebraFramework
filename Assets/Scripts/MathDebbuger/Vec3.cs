@@ -156,15 +156,10 @@ namespace CustomMath
         }
         public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {
-            Vec3 vecAux = Vec3.One;
-            if (t < 1)
-            {
-                vecAux = new Vec3(((b - a) * t + a));
-            }
-            else
-            {
-                t = 1.0f;
-            }
+            Vec3 vecAux;
+
+            vecAux = new Vec3(((b - a) * t + a));
+ 
             return vecAux;
         }
         public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)
