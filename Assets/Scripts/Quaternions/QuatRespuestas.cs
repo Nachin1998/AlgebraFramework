@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEngine;
-using MathDebbuger;
 using CustomMath;
+using UnityEngine.UIElements;
+using System.Threading;
 
-public class QuatTester : MonoBehaviour
+public class QuatRespuestas : MonoBehaviour
 {
-    Quaternions quat1 = new Quaternions(1,1,1,1);
-    Quaternion quat2 = new Quaternion(1,1,1,1);
     public enum RespuestaAEjer
     {
         Uno,
@@ -16,14 +16,16 @@ public class QuatTester : MonoBehaviour
 
     public RespuestaAEjer respuestaAEjer = RespuestaAEjer.Uno;
 
-    void Start()
-    {
-        Debug.Log(quat1);
-        quat1 = Quaternions.Inverse(quat1);
-        Debug.Log(quat1);
-    }
+    public float angle;
+    public Quaternion q1 = new Quaternion(1, 1, 1, 1);
+    public Quaternions qc = new Quaternions(1, 1, 1, 1);
+    float t;
 
     // Update is called once per frame
+    private void Start()
+    {
+        Debug.Log(qc + " test");
+    }
     void Update()
     {
         switch (respuestaAEjer)
