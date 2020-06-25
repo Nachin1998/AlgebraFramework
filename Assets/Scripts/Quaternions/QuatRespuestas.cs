@@ -13,7 +13,7 @@ public class QuatRespuestas : MonoBehaviour
         Dos,
         Tres
     }
-
+    
     public RespuestaAEjer respuestaAEjer = RespuestaAEjer.Uno;
 
     public float angle;
