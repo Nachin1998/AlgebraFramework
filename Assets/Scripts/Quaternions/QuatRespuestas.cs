@@ -1,49 +1,58 @@
 ﻿using UnityEngine;
-using CustomMath;
 using MathDebbuger;
-using EjerciciosAlgebra;
+using CustomMath;
+using System.Collections.Generic;
 
 public class QuatRespuestas : MonoBehaviour
 {
-    public enum RespuestaAEjer
+    public enum Ejercicios
     {
-        Uno,
-        Dos,
+        Uno, 
+        Dos, 
         Tres
     }
+    public Ejercicios ejercicios = Ejercicios.Uno;
 
-    public RespuestaAEjer respuestaAEjer = RespuestaAEjer.Uno;
-
-    public GameObject thing;
+    const int max = 3;
     public float angle;
-    Quaternion q = new Quaternion(1, 1, 1, 1);
-    Quaternions q1 = new Quaternions(1, 1, 1, 1);
-    Quaternions q2 = new Quaternions(1, 1, 1, 1);
-    Quaternions q3 = new Quaternions(1, 1, 1, 1);
-    float timer;
-
-    // Update is called once per frame
+    public Vector3 lineaA;
+    float newAngle;
+    public GameObject vectorObject;
+    List<GameObject> extras = new List<GameObject>();
     private void Start()
-    {
-        //Debug.Log(qc + " test");
-    }
-    void Update()
-    {
-        angle = Quaternions.Angle(q2, q3);
-        thing.transform.rotation = new Quaternion(0, 0, angle, 0);
-        switch (respuestaAEjer)
+    {        
+        for (int i = 0; i < 3; i++)
         {
-            case RespuestaAEjer.Uno:
+            extras.Add(vectorObject);
+        }
 
+        lineaA = new Vec3(10,0,0);
+        newAngle = 0;
+        VectorDebugger.EnableCoordinates();
+
+        Debug.Log(lineaA.ToString());
+        VectorDebugger.AddVector(lineaA, Color.green, "Verde");
+
+        VectorDebugger.EnableEditorView();
+    }
+    private void Update()
+    {
+        newAngle += angle;
+        Vec3 a = new Vec3(lineaA);
+        
+        Quaternions q1 = new Quaternions(a.x, a.y, a.z, 0);
+        Quaternion q2 = new Quaternion(a.x, a.y, a.z, 0);
+        switch (ejercicios)
+        {
+            case Ejercicios.Uno:
+                vectorObject.transform.rotation = Quaternion.Euler(90, newAngle, 0);
                 break;
-
-            case RespuestaAEjer.Dos:
-
+            case Ejercicios.Dos:
                 break;
-
-            case RespuestaAEjer.Tres:
-
+            case Ejercicios.Tres:
                 break;
         }
+        VectorDebugger.UpdatePosition("Verde", a);
     }
+
 }

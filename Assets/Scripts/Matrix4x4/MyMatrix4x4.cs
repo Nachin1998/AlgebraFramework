@@ -27,23 +27,23 @@ namespace CustomMath {
         public MyMatrix4x4(Vector4 column0, Vector4 column1, Vector4 column2, Vector4 column3)
         {
             m00 = column0.x;
-            m10 = column0.y;
-            m20 = column0.z;
-            m30 = column0.w;
+            m10 = column0.x;
+            m20 = column0.x;
+            m30 = column0.x;
             
-            m01 = column1.x;
+            m01 = column1.y;
             m11 = column1.y;
-            m21 = column1.z;
-            m31 = column1.w;
+            m21 = column1.y;
+            m31 = column1.y;
             
-            m02 = column2.x;
-            m12 = column2.y;
+            m02 = column2.z;
+            m12 = column2.z;
             m22 = column2.z;
-            m32 = column2.w;
+            m32 = column2.z;
             
-            m03 = column3.x;
-            m13 = column3.y;
-            m23 = column3.z;
+            m03 = column3.w;
+            m13 = column3.w;
+            m23 = column3.w;
             m33 = column3.w;
         }
 

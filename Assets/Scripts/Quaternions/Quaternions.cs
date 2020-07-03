@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using CustomMath;
-using System.Runtime.CompilerServices;
 
 namespace CustomMath
 {
@@ -38,6 +34,14 @@ namespace CustomMath
 
         public static float Angle(Quaternions a, Quaternions b)
         {
+            /*
+            Returns the angle in degrees between two rotations a and b.
+
+            Example: Think of two GameObjects (A and B) moving around a third GameObject (C). 
+            Lines from C to A and C to B create a triangle which can change over time. 
+            The angle between CA and CB is the value Quaternion.Angle provides.
+            */
+            
             /*float result;
             float angleA;
             float angleB;
@@ -46,11 +50,10 @@ namespace CustomMath
             angleA = Mathf.Sqrt(a.x + a.y + a.z + a.w);
             angleB = Mathf.Sqrt(b.x + b.y + b.z + b.w);
 
-            return Mathf.Acos(result / (angleA * angleB));*/
+            return Mathf.Acos(result / (angleA * angleB));*/    
 
-            Quaternions inv = Inverse(a);
-            Debug.Log(inv);
-            Quaternions result = b * inv;
+            Quaternions aux = Inverse(a);
+            Quaternions result = b * aux;
             float ej = Mathf.Acos(result.w) * 2.0f * Mathf.Rad2Deg;
             return ej;
         }
@@ -72,11 +75,35 @@ namespace CustomMath
         }
         public static Quaternions Euler(Vec3 euler)
         {
-            throw new NotImplementedException();
+            /*
+            Returns a rotation that rotates z degrees around the z axis, 
+            x degrees around the x axis, and y degrees around the y axis; applied in that order.
+            */
+
+            Quaternions aux = new Quaternions(euler.x,euler.y,euler.z,0);
+            float rad = Mathf.Deg2Rad;
+            euler *= rad;
+            aux.x = Mathf.Sin(euler.x * 0.5f);
+            aux.y = Mathf.Sin(euler.y * 0.5f);
+            aux.z = Mathf.Sin(euler.z * 0.5f);
+            aux.w = Mathf.Cos(euler.x * 0.5f) * Mathf.Cos(euler.y * 0.5f) * Mathf.Cos(euler.z * 0.5f) - Mathf.Sin(euler.x * 0.5f) * Mathf.Sin(euler.y * 0.5f) * Mathf.Sin(euler.z * 0.5f);
+            aux.Normalize();
+            return aux;
         }
         public static Quaternions Euler(float x, float y, float z)
         {
-            throw new NotImplementedException();
+            Quaternions aux = new Quaternions(x,y,z,0);
+            float rad = Mathf.Deg2Rad;
+            x *= rad;
+            y *= rad;
+            z *= rad;
+            
+            aux.x = Mathf.Sin(x * 0.5f);
+            aux.y = Mathf.Sin(y * 0.5f);
+            aux.z = Mathf.Sin(z * 0.5f);
+            aux.w = Mathf.Cos(x * 0.5f) * Mathf.Cos(y * 0.5f) * Mathf.Cos(z * 0.5f) - Mathf.Sin(x * 0.5f) * Mathf.Sin(y * 0.5f) * Mathf.Sin(z * 0.5f);
+            aux.Normalize();
+            return aux;
         }
 
         public static Quaternions EulerAngles(float x, float y, float z)
@@ -144,16 +171,17 @@ namespace CustomMath
         {
             throw new NotImplementedException();
         }
-        public static Quaternions Normalize(Quaternion q)
+        public static Quaternions Normalize(Quaternions q)
         {
+            Quaternions normal = q;
             float magnitude = Mathf.Sqrt(q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
 
-            q.x /= magnitude;
-            q.y /= magnitude;
-            q.z /= magnitude;
-            q.w /= magnitude;
+            normal.x /= magnitude;
+            normal.y /= magnitude;
+            normal.z /= magnitude;
+            normal.w /= magnitude;
 
-            return new Quaternions(q.x, q.y, q.z, q.w);
+            return normal;
         }
         public static Quaternions RotateTowards(Quaternion from, Quaternion to, float maxDegreesDelta)
         {
@@ -197,7 +225,10 @@ namespace CustomMath
         }
         public void Set(float newX, float newY, float newZ, float newW)
         {
-            throw new NotImplementedException();
+            x = newX;
+            y = newY;
+            z = newZ;
+            w = newW;
         }
 
         public void SetAxisAngle(Vec3 axis, float angle)
@@ -267,6 +298,34 @@ namespace CustomMath
         public static Quaternions operator *(Quaternions lhs, Quaternions rhs)
         {
             return new Quaternions(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w);
+        }
+        public static bool operator ==(Quaternions lhs, Quaternions rhs)
+        {
+            if (lhs.x == rhs.x && 
+                lhs.y == rhs.y && 
+                lhs.z == rhs.z && 
+                lhs.w == rhs.w)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool operator !=(Quaternions lhs, Quaternions rhs)
+        {
+            if (lhs.x != rhs.x || 
+                lhs.y != rhs.y || 
+                lhs.z != rhs.z || 
+                lhs.w != rhs.w)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
